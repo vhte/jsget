@@ -19,13 +19,16 @@ You've 3 ways to implement jsget in your page.
 ```html
 <script src="file.js?foo=bar&key=value"></script>
 ```
-`file.js?foo=bar&key=value`
+
+file.js?foo=bar&key=value
 
 ```html
-var g = new Jsget;
-document.write(g.get('foo')); // returns 'bar'
-document.write(g.get('key')); // returns 'value'
-document.write(g.get('anything')); // returns false
+<script>
+	var g = new Jsget;
+	document.write(g.get('foo')); // returns 'bar'
+	document.write(g.get('key')); // returns 'value'
+	document.write(g.get('anything')); // returns false
+</script>
 ```
 
 2nd - A typed url
@@ -34,17 +37,19 @@ document.write(g.get('anything')); // returns false
 <script src="file.js?foo=bar"></script>
 ```
 
-`file.js?foo=bar`
+file.js?foo=bar
 
 ```html
-var g = new Jsget('http://example.com/page?out=side');
-document.write(g.get('out')); // returns 'side'
-document.write(g.get('foo')); // returns false
+<script>
+	var g = new Jsget('http://example.com/page?out=side');
+	document.write(g.get('out')); // returns 'side'
+	document.write(g.get('foo')); // returns false
+</script>
 ```
 
 3rd - Directly inside a &lt;script&gt; tag in HTML document
 
-`file.html?foo=bar&new=one&two=whatever`
+file.html?foo=bar&new=one&two=whatever
 
 ```html
 <script>
@@ -60,38 +65,46 @@ document.write(g.get('foo')); // returns false
 Javascript files can't know which name they have, only the page which loaded them. This is a language limitation, so, like explained at HOW IT WORKS section, jsget needs to walk with DOM construction and reads the last &lt;script&gt; tag loaded (which is the DOM pointer position).
 What that means for me? You just can't use jsget inside ready or load statements. Look:
 
-`file.js?foo=bar`
+file.js?foo=bar
 
 ```html
-var r = new Jsget;
-document.write(r.get('foo')); // returns 'bar'
-```
-
-`file.js?good=day`
-
-```html
-window.onload = function() {
+<script>
 	var r = new Jsget;
-	document.write(r.get('good')); // Wrong! It probably should not return what you expect...
-};
+	document.write(r.get('foo')); // returns 'bar'
+</script>
 ```
 
-`file.js?jquery=iscool`
+file.js?good=day
 
 ```html
-$(document).ready(function(){
+<script>
+	window.onload = function() {
+		var r = new Jsget;
+		document.write(r.get('good')); // Wrong! It probably should not return what you expect...
+	};
+</script>
+```
+
+file.js?jquery=iscool
+
+```html
+<script>
+	$(document).ready(function(){
+		var r = new Jsget;
+		document.write(r.get('jquery')); // Wrong! Same as above
+	});
+</script>
+```
+
+file.js?use=jquery
+
+```html
+<script>
 	var r = new Jsget;
-	document.write(r.get('jquery')); // Wrong! Same as above
-});
-```
-
-`file.js?use=jquery`
-
-```html
-var r = new Jsget;
-$(document).ready(function(){
-	document.write(r.get('use')); // Ok! Class instance is outside ready/load statement
-});
+	$(document).ready(function(){
+		document.write(r.get('use')); // Ok! Class instance is outside ready/load statement
+	});
+</script>
 ```
 
 You said it should not return what I expected. What 'write' method will return then?
