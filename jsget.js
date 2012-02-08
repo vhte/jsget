@@ -13,18 +13,7 @@
  * @todo	get() Permitir o uso de Array ou Object contendo + de 1 parâmetro. Retornar como objeto
  * @todo	Métodos que permitem algum tipo de filtro nos key=>values (bad word, decodificações, transformações, etc)
  */
-function Jsget(file) {
-	
-	
-	
-	
-	//document.location.href = document.location.href+'#t';
-	console.log(file);
-	
-	
-	
-	
-	
+function Jsget(file) 	
 	// Object public attributes and "methods" (js doesn't have methods, but functions as methods [or something like])
 	/**
 	 * queryString
