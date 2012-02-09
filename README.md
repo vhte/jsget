@@ -8,7 +8,7 @@ A simple way to enable querystring in javascript files. It can also be used with
 Jsget was created to add a feature that doesn't exists natively in javascript, but could help webdevelopers offering a common serverside script functionality.
 
 First of all, when a new object is created, jsget will search the last &lt;script&gt; tag of the partial DOM loaded. The last &lt;script&gt; tag is the script that jsget is working at moment, then the querystring from src attr is loaded and each key=>val element is placed inside an object local variable.
-After that, you need to call get() method with a string as parameter. This string should be one of querystring loaded keys (see `How it works` section for examples).
+After that, you need to call get() method with a string as parameter. This string should be one of querystring loaded keys (see `How to use` section for examples).
 
 
 ### How to use ###
