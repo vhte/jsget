@@ -109,5 +109,5 @@ What is this about? You can't use jsget inside ready or load statements. Look:
 ```
 
 In `window.load` example above it should not return what I expect. What 'write' method will return then?
-Simple. When using ready/load statements, you tell the script to wait until full DOM (or even more, like images) is loaded. If DOM is loaded and jsget is called inside a ready/load statement, it will get the latest &lt;script&gt; written in your HTML document. Maybe this ready/load script could be your last &lt;script&gt; tag inside document. **Avoid it*
+Simple. When using ready/load statements, you tell the script to wait until full DOM (or even more, like images) is loaded. If DOM is loaded and jsget is called inside a ready/load statement, it will get the latest &lt;script&gt; written in your HTML document. Maybe this ready/load script could be your last &lt;script&gt; tag inside document. **Avoid it**
 
