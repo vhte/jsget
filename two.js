@@ -1,2 +1,2 @@
-var r = new Jsget;
-console.log('two.js -> '+r.get('filename'));
+var two = new Jsget;
+answers += 'two.js = ' + two.get('filename') + '\n';

@@ -1,2 +1,2 @@
-var r = new Jsget('http://google.com/?url=http://dialhost.com.br/');
-console.log('one.js -> '+r.get('url'));
+var one = new Jsget('http://example.com/?url=http://google.com/');
+answers += 'one.js = ' + one.get('url') + '\n';
