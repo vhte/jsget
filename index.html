@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Jsget example page</title>
+		<meta charset="utf-8">
+		
+		<script>
+			// Just a help element to print outputs. Needs to be global, everyone will use it.
+			var answers = '';
+		</script>
+		
+		<!-- Remember, you need to load jsget.js before the first use -->
+		<script src="jsget-min.js"></script>
+		
+		<!-- our first example. Take a look inside -->
+		<script src="one.js?foo=123&bar=someoption"></script>
+		
+		<!-- Example using $(document).ready() and window.onload -->
+		<script src="jquery-1.7.1.min.js"></script>
+		<script src="three.js?jquery=itsok"></script>
+		
+		<!-- Classic example, the querystring from this js file -->
+		<script src="two.js?filename=two"></script>
+		
+		<!-- This html page querystring. Try type index.html?foo=bar -->
+		<script>
+			var r = new Jsget;
+			answers += 'index.html = ' + r.get('foo') + '\n';
+		</script>
+		
+		<style>
+			body,pre {
+				font-family: Arial;
+				font-size:14px;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		<h1>Hello Jsget!</h1>
+		
+		<pre id="answers">
+			<script>
+				window.onload = function() {
+					// Calls the function from three.js. It's still inside a window.onload()
+					jsgetWindowOnload();
+
+					// After everything is loaded, outputs to page html
+					document.getElementById('answers').innerHTML = answers;
+				}
+			</script>
+		</pre>
+		
+	</body>
+</html>
