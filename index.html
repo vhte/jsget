@@ -10,7 +10,7 @@
 		</script>
 		
 		<!-- Remember, you need to load jsget.js before the first use -->
-		<script src="jsget-min.js"></script>
+		<script src="jsget.js"></script>
 		
 		<!-- our first example. Take a look inside -->
 		<script src="one.js?foo=123&bar=someoption"></script>
@@ -25,7 +25,10 @@
 		<!-- This html page querystring. Try type index.html?foo=bar -->
 		<script>
 			var r = new Jsget;
-			answers += 'index.html = ' + r.get('foo') + '\n';
+			answers += 'index.html[get()] = ' + r.get('foo') + '\n';
+			answers += 'index.html[get() w/ type] = ' + r.get('foo', 'integer') + '\n';
+			answers += 'index.html[toString()] = ' + r.toString() + '\n'; // get the original querystring
+			answers += 'index.html[validType()] = ' + r.validType('foo', 'string') + '\n'; // I'm checkin if foo key has a valid number value.
 		</script>
 		
 		<style>
