@@ -76,7 +76,7 @@ To get a value as it "should be" type, just use the second parameter with `get()
 </script>
 ```
 
-Also, if you wanna a strict type validation (i.e I need foo to receive an integer type, any other type should be an error), `validType` could help. This function will validate the type you defined with the true type that jsget will retrieve.
+Also, if you want a strict type validation (i.e I need foo to receive an integer type, any other type should be an error), `validType` could help. This function will validate the type you defined with the true type jsget will retrieve.
 
 **file.js?foo=12**
 
@@ -85,7 +85,7 @@ Also, if you wanna a strict type validation (i.e I need foo to receive an intege
 	var r = new Jsget;
 
 	// Jsget will first transform (string)12 to (number)12 and next validate with 'integer' type. Any type incompatibility will return false. If types are ok, just return 12 (as number object).
-	document.write(r.validType('foo', 'integer'));
+	document.write(r.validType('foo', 'integer')); // returns 12, because (string)12 changed to (number)12 and is a valid integer
 </script>
 ```
 
@@ -94,8 +94,8 @@ The second param from `get()` and `validType()` share the same configuration. Js
 * __null__ To empty strings like `?foo=`
 * __float__ Floating point numbers like `?foo=12.3`
 * __integer__ Integer numbers `?foo=12`
-* __object__ You can also use string objects (like JSON) `?foo={a:'b',c:'d'}`
-* __array__ Arrays looks like objects, but more simple `?foo=['one','two','three']`
+* __object__ You can also use strings to represent objects (like JSON) `?foo={a:'b',c:'d'}`
+* __array__ Arrays are like objects, but more simple `?foo=['one','two','three']`
 
 Undefined type is useless here because all functions need to verify the existence of all keys called.
 

@@ -74,11 +74,12 @@ function Jsget(file) {
 		}
 		
 		// Param validation ok, attempt to retrieve value type
-		var v = __findType(key, type);
+		var v = __findType(__params[key], type);
+		//console.log(v);
 		//console.log(typeof(v.value)+' = '+type);
 		
 		// Just check __findType() and type
-		if(typeof(v.value) !== type)
+		if(v.type !== type)
 			return false;
 		
 		// Ok, true type and param type are the same
