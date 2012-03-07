@@ -4,7 +4,7 @@
  * Allows querystring use inside .js files and <script> tags
  * 
  * @author	Victor Torres - talk@victortorr.es
- * @version 1.0b
+ * @version	1.0.1b
  * @since	02/2012
  * @param 	string	file Optional. If empty, js script itself. If a string url is passed (with querystring), jsget will read it instead of page or .js url.
  * @returns	Object
@@ -12,7 +12,6 @@
  * @example	var r = new Jsget;console.log(r.getParams('foo')); // if src from <script> is "one.js?foo=123&bar=someoption" it should return 123
  * @todo	get() Allow Object or Array as parameter.
  * @todo	Filter methods that allow any use for badwords, decodes, changes, etc.
- * @todo	Console object integration
  * @todo	status code. Any querystring error inside __params should be reported
  */
 function Jsget(file) {
@@ -68,8 +67,7 @@ function Jsget(file) {
 		// Check if type parameter has a valid value
 		if(valid.indexOf(type) === -1) { // no match inside array
 			// This is used 2 times. Better put in a private method
-			if(typeof(console) === 'object')
-				console.error('The "type" parameter is invalid, please check documentation. Valid values: '+valid.join(', '));
+			__console('error', 'The "type" parameter is invalid inside a validType(), please check documentation.\nYou wrote "'+type+'" and valid values are: %o', valid);
 			return false;
 		}
 		
@@ -104,7 +102,7 @@ function Jsget(file) {
 	/**
 	 * __findType
 	 * 
-	 * Tries to find a cohesive type to passed str]
+	 * Tries to find a cohesive type to passed str
 	 * 
 	 * @param	string	str		A value (new String() object)
 	 * @return	mixed	If error, false. Anything else {type, value}
@@ -160,6 +158,34 @@ function Jsget(file) {
 		return ret;
 	};
 	
+	/**
+	 * __console
+	 * 
+	 * Throw a message if console is enabled.
+	 * 
+	 * @param	string	type	log type. [log,warn,info]
+	 * @return	void	Console message
+	 * @see		http://getfirebug.com/wiki/index.php/Console_API
+	 */
+	var __console = function(type, message, extra) {
+		// Verifies if console isn not enabled, so there's nothing to do here.
+		if(typeof(console) !== 'object')
+			return false;
+		
+		var ex = (typeof(extra) !== 'undefined' ? extra : '');
+			
+		switch(type) {
+			case 'warn':
+				console.warn(message, ex); break;
+			case 'info':
+				console.info(message, ex); break;
+			case 'error':
+				console.error(message, ex); break;
+			default: // "log"
+				console.log(message);
+		}
+	};
+	
 	/*********** __CONSTRUCT *********************/
 	(function(){
 		// if no file is specified at constructor param and no src attr is found (empty means code between <script></script>), then get document itself
@@ -167,10 +193,10 @@ function Jsget(file) {
 			file = document;
 		else {
 			// string or selfscript
-			var newfile = new Object(); // {}
+			var newfile = {}; // new Object()
 			newfile.src = (typeof(file) === 'string' ?
-													file // if string, simulates document scripts attribute as object
-													: document.location.href); // anything else means you're using this class inside a <script> tag in your html. So, we get the page base url. Our file now assumes the own text/html document
+					file // if string, simulates document scripts attribute as object
+					: document.location.href); // anything else means you're using this class inside a <script> tag in your html. So, we get the page base url. Our file now assumes the own text/html document
 			file = {scripts: [newfile]};
 		}
 		

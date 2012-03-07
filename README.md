@@ -99,6 +99,8 @@ The second param from `get()` and `validType()` share the same configuration. Js
 
 Undefined type is useless here because all functions need to verify the existence of all keys called.
 
+There is another function `toString()`. This one returns the querystring as string.
+
 ### Limitations ###
 
 Javascript files can't know their own filename, only the page which loaded them. This is a language limitation, so like explained at `How it works` section, jsget needs to walk with DOM construction and read the last &lt;script&gt; tag loaded (which is the DOM pointer position).
@@ -147,5 +149,5 @@ What is this about? You can't use jsget inside ready or load statements. Look:
 </script>
 ```
 
-In `window.load` example above it should not return what I expect. What 'write' method will return then?
+In `window.load` example above it should not return what I expect. What `write()` method will return then?
 Simple. When using ready/load statements, you tell the script to wait until full DOM (or even more, like images) is loaded. If DOM is loaded and jsget is called inside a ready/load statement, it will get the latest &lt;script&gt; written in your HTML document. Maybe this ready/load script could be your last &lt;script&gt; tag inside document. **Avoid it**.
