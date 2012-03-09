@@ -4,7 +4,7 @@
  * Allows querystring use inside .js files and <script> tags
  * 
  * @author	Victor Torres - talk@victortorr.es
- * @version	1.0.1b
+ * @version	1.0.1
  * @since	02/2012
  * @param 	string	file Optional. If empty, js script itself. If a string url is passed (with querystring), jsget will read it instead of page or .js url.
  * @returns	Object
